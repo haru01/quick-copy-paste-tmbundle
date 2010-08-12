@@ -30,5 +30,4 @@ def choices
   comp_list.uniq
 end
 
-TextMate::UI.complete(choices, :extra_chars => '_')
-
+TextMate::UI.complete(choices, :extra_chars => '_!?')
