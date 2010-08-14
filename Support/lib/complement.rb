@@ -1,8 +1,8 @@
 require "#{ENV["TM_SUPPORT_PATH"]}/lib/ui"
 
 def choices
-  return [] if ENV['TM_CURRENT_WORD'].size < 3
-  paths = `mdfind "name:#{ENV['TM_CURRENT_WORD']}" | grep "i.yaml$"`
+  return [] if ENV['TM_CURRENT_WORD'].size < 2
+  paths = `mdfind "name:#{ENV['TM_CURRENT_WORD']}" -name yaml | grep "ri/.*\.yaml$"`
   comp_list = []
   paths.each do|path|
     open(path.strip) do |f|
@@ -29,5 +29,5 @@ def choices
   end
   comp_list.uniq
 end
-
+#
 TextMate::UI.complete(choices, :extra_chars => '_!?')
