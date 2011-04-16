@@ -1,0 +1,21 @@
+== What?
+TextMate Bundle. 
+Quick one line in project copy and paste
+
+== Installation
+
+  cd ~/Library/Application\ Support/TextMate/Bundles
+  git clone git://github.com/haru01/quick-copy-tmbundle.git QuickCopy.tmbundle
+
+== if use ruby 1.9
+replase TextMate.app/SharedSupport/Support/lib/ui.rb
+
+  def complete(choices, options = {}, &block) #  :yields: choice
+    pid = fork do
+ -     STDOUT.reopen(open('/dev/null'))
+ -     STDERR.reopen(open('/dev/null'))
+ +     STDOUT.reopen(open('/dev/null', 'a'))
+ +     STDERR.reopen(open('/dev/null', 'a'))
+
+
+Copyright (c) 2011 Eiji Ienaga, released under the MIT license
