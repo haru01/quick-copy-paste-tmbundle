@@ -17,7 +17,7 @@ require ENV['TM_BUNDLE_SUPPORT'] + "/lib/search_and_paste"
 	<key>name</key>
 	<string>complement</string>
 	<key>output</key>
-	<string>afterSelectedText</string>
+	<string>showAsTooltip</string>
 	<key>uuid</key>
 	<string>0BF1C2A3-51CA-4E72-B4A7-2BA1D4ED66CE</string>
 </dict>
