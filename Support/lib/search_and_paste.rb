@@ -16,7 +16,7 @@ results = `find "#{find_dir}"  #{names} -print0 | xargs -0 egrep "#{word}" | sed
 choices = results.split("\n").map do |node|
   if m = /(\w+)(.*)/.match(node)
     index = 0
-    insert = m[2].split(/,\s*/).map{|n| index  += 1; "${#{index}:#{n}}" }.join(", ")  
+    insert = m[2].split(/,\s*/).map{|n| index  += 1; "${#{index}:#{n}}" }.join(", ") + "${#{index + 1}}"
     {'display' =>  node, 'match' => m[1], 'insert' => insert}
   else
     {'display' =>  node, 'match' => node}
