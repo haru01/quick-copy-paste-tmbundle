@@ -1,6 +1,7 @@
 == What?
 TextMate Bundle. 
-Quick one line in project copy and paste
+Quick copy and paste one line in project. 
+Behavior, like auto complete 
 
 == Installation
 

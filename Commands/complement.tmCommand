@@ -13,7 +13,7 @@ require ENV['TM_BUNDLE_SUPPORT'] + "/lib/search_and_paste"
 	<key>input</key>
 	<string>selection</string>
 	<key>keyEquivalent</key>
-	<string>^@ </string>
+	<string>^ </string>
 	<key>name</key>
 	<string>complement</string>
 	<key>output</key>
