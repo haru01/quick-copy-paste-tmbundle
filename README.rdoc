@@ -12,7 +12,7 @@ Behavior, like auto complete
 
 == if use ruby 1.9
 
-1. replace TextMate.app/SharedSupport/Support/lib/ui.rb
+=== replace TextMate.app/SharedSupport/Support/lib/ui.rb
 
   def complete(choices, options = {}, &block) #  :yields: choice
     pid = fork do
@@ -22,12 +22,14 @@ Behavior, like auto complete
  +     STDERR.reopen(open('/dev/null', 'a'))
 
 
-2. replace osx-plist
+=== replace osx-plist
 
  git clone git://github.com/kballard/osx-plist.git
  cd osx-plist/ext/plist
  ruby extconf.rb && make
  cp plist.bundle /Applications/TextMate.app/Contents/SharedSupport/Support/lib/osx/
+
+
 
 
 Copyright (c) 2011 Eiji Ienaga, released under the MIT license
