@@ -14,7 +14,14 @@ names = "\\(#{extensions.map{|e| "-or -name '*.#{e}' "}.join}\\)".sub("-or", "")
 results = `find "#{find_dir}"  #{names} -print0 | xargs -0 egrep "#{word}" | sed 's/.*#{word}/#{word}/'|sort|uniq`
 
 choices = results.split("\n").map do |node|
-  {'display' =>  node, 'match' => node}
+  if m = /(\w+)(.*)/.match(node)
+    index = 0
+    insert = m[2].split(/,\s*/).map{|n| index  += 1; "${#{index}:#{n}}" }.join(", ")  
+    {'display' =>  node, 'match' => m[1], 'insert' => insert}
+  else
+    {'display' =>  node, 'match' => node}
+  end
 end
 
 TextMate::UI.complete(choices, :extra_chars => '_!?') 
+
