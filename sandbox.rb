@@ -1,9 +1,11 @@
-class QuickCopy
-  def copy_and_paste(param)
+class Hoge
+  def fuga(param)
   end
-  def copy_and_paste2(param, param2)
+  def fuga(param1, param2)
   end
 end
+
+Hoge.new
 
 
 
