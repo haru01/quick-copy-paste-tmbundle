@@ -11,9 +11,12 @@ if word.nil? || word.size <= 1
 end
 
 names = "\\(#{extensions.map{|e| "-or -name '*.#{e}' "}.join}\\)".sub("-or", "")
-results = `find "#{find_dir}"  #{names} -print0 | xargs -0 egrep "#{word}" | sed 's/.*#{word}/#{word}/'|sort|uniq`
+results = `find "#{find_dir}"  #{names} -print0 | xargs -0 egrep "#{word}" | sed 's/.*#{word}/#{word}/'| sort | uniq`
 
-choices = results.split("\n").map do |node|
+
+choices = results.split("\n").sort{ |a, b|
+  b.include?("(") ? b <=> a : a<=> b
+}.map do |node|
   if m = /(\w+)(.*)/.match(node)
     index = 0
     insert = m[2].split(/,\s*/).map{|n| index  += 1; "${#{index}:#{n}}" }.join(", ") + "${#{index + 1}}"
@@ -23,5 +26,4 @@ choices = results.split("\n").map do |node|
   end
 end
 
-TextMate::UI.complete(choices, :extra_chars => '_!?') 
-
+TextMate::UI.complete(choices, :extra_chars => '_!?')
