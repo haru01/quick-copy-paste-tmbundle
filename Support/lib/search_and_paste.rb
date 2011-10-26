@@ -2,7 +2,12 @@ require "#{ENV["TM_SUPPORT_PATH"]}/lib/ui"
 
 # config
 word = ENV['TM_CURRENT_WORD']
-find_dir = ENV['TM_PROJECT_DIRECTORY']
+
+find_dir = %w[app lib db spec].inject(""){ |result, dir|
+  result += " #{ENV['TM_PROJECT_DIRECTORY']}/#{dir}"  if Dir.exist?("#{ENV['TM_PROJECT_DIRECTORY']}/#{dir}")
+}
+find_dir ||= "\'#{ENV['TM_PROJECT_DIRECTORY']}\'"
+
 extensions = %w[rb haml sass]
 
 if word.nil? || word.size <= 1
@@ -11,7 +16,7 @@ if word.nil? || word.size <= 1
 end
 
 names = "\\(#{extensions.map{|e| "-or -name '*.#{e}' "}.join}\\)".sub("-or", "")
-results = `find "#{find_dir}"  #{names} -print0 | xargs -0 egrep "#{word}" | sed 's/.*#{word}/#{word}/'| sort | uniq`
+results = `find #{find_dir}  #{names} -print0 | xargs -0 egrep "#{word}" | sed 's/.*#{word}/#{word}/'| sort | uniq`
 
 
 choices = results.split("\n").sort{ |a, b|
